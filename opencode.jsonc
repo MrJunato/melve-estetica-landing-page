@@ -1,0 +1,126 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  // Muse executa; Sol planeja e revisa riscos. Build/plan delegam a design/conversion só quando há ganho concreto.
+  "model": "meta/muse-spark-1.3-contributor",
+  "default_agent": "build",
+  "permissions": [
+    { "action": "*", "resource": "*", "effect": "ask" },
+    { "action": "read", "resource": "*", "effect": "allow" },
+    { "action": "glob", "resource": "*", "effect": "allow" },
+    { "action": "grep", "resource": "*", "effect": "allow" },
+    { "action": "edit", "resource": "*", "effect": "allow" },
+    { "action": "question", "resource": "*", "effect": "allow" },
+    { "action": "skill", "resource": "*", "effect": "allow" },
+    { "action": "webfetch", "resource": "*", "effect": "allow" },
+    { "action": "websearch", "resource": "*", "effect": "allow" },
+    { "action": "execute", "resource": "*", "effect": "allow" },
+    { "action": "shell", "resource": "git status *", "effect": "allow" },
+    { "action": "shell", "resource": "git diff *", "effect": "allow" },
+    { "action": "shell", "resource": "git log -5 --oneline *", "effect": "allow" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" },
+    { "action": "read", "resource": "*.env", "effect": "ask" },
+    { "action": "read", "resource": "*.env.*", "effect": "ask" },
+    { "action": "read", "resource": "*.env.example", "effect": "allow" },
+    { "action": "read", "resource": "*.pem", "effect": "ask" },
+    { "action": "read", "resource": "*.key", "effect": "ask" },
+    { "action": "read", "resource": "*.db*", "effect": "ask" },
+    { "action": "read", "resource": "*.sqlite*", "effect": "ask" },
+    { "action": "read", "resource": "*.dump", "effect": "ask" },
+    { "action": "read", "resource": "*.sql", "effect": "ask" },
+    { "action": "read", "resource": "*.csv", "effect": "ask" },
+    { "action": "read", "resource": "*.xlsx", "effect": "ask" },
+    { "action": "read", "resource": "*.pdf", "effect": "ask" },
+    { "action": "read", "resource": "*.zip", "effect": "ask" },
+    { "action": "edit", "resource": "*.env*", "effect": "ask" },
+    { "action": "edit", "resource": "*.pem", "effect": "ask" },
+    { "action": "edit", "resource": "*.key", "effect": "ask" },
+    { "action": "edit", "resource": "*.db*", "effect": "ask" },
+    { "action": "edit", "resource": "*.sqlite*", "effect": "ask" },
+    { "action": "edit", "resource": "*opencode.json*", "effect": "ask" },
+    { "action": "edit", "resource": "*AGENTS.md", "effect": "ask" },
+    { "action": "edit", "resource": "*.opencode/*", "effect": "ask" },
+    { "action": "edit", "resource": "*.claude/*", "effect": "ask" },
+    { "action": "edit", "resource": "*OPENCODE_WORKFLOW.md", "effect": "ask" },
+    { "action": "edit", "resource": "*skills-lock.json", "effect": "ask" },
+    { "action": "edit", "resource": "backup/*", "effect": "deny" }
+  ],
+  "agents": {
+    "build": {
+      "model": "meta/muse-spark-1.3-contributor#high",
+      "description": "Implementação direta; delega a design/conversion só com ganho concreto.",
+      "system": "Siga AGENTS.md. Resolva o rotineiro diretamente com o menor contexto suficiente; agrupe leituras/buscas independentes. Delegue a design ou conversion apenas com objetivo delimitado, insumos e formato de resposta; reutilize decisões aprovadas. Não inicie revisores para perguntas, docs ou ajustes mecânicos. Para segurança/dados/cálculos críticos, preserve revisão independente e testes. Não publique, contrate serviços nem execute deploys sem aprovação.",
+      "permissions": [
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "design", "effect": "allow" },
+        { "action": "subagent", "resource": "conversion", "effect": "allow" }
+      ]
+    },
+    "plan": {
+      "model": "openai/gpt-6.1-sol#high",
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "design", "effect": "allow" },
+        { "action": "subagent", "resource": "conversion", "effect": "allow" }
+      ]
+    },
+    "explore": { "model": "meta/muse-spark-1.3-contributor#medium" },
+    "general": {
+      "model": "meta/muse-spark-1.3-contributor#medium",
+      "description": "Apoio delimitado: documentação, sínteses e ajustes mecânicos de baixo risco.",
+      "system": "Siga AGENTS.md. Atue só no escopo recebido; retorne arquivos/linhas, evidências e pendências. Não altere autenticação, dados sensíveis, schema ou integrações pagas; reporte ao build. Não delegue nem repita tentativas sem hipótese nova."
+    },
+    "design": {
+      "model": "meta/muse-spark-1.3-contributor#medium",
+      "description": "Direção visual e revisão de interface para a landing page. Acionado por build/plan.",
+      "mode": "subagent",
+      "steps": 8,
+      "system": "Você é o especialista de design da landing page. Use frontend-design para criar direção visual e web-design-guidelines só para revisar código implementado. Responda compacto: decisão, motivo breve, arquivos/linhas quando houver código, pendências. Sem editar arquivos, sem shell, sem delegar. Não gere imagens externas nem reutilize fotos sem autorização; priorize mobile, acessibilidade e performance.",
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "question", "resource": "*", "effect": "deny" },
+        { "action": "skill", "resource": "*", "effect": "deny" },
+        { "action": "skill", "resource": "frontend-design", "effect": "allow" },
+        { "action": "skill", "resource": "web-design-guidelines", "effect": "allow" }
+      ]
+    },
+    "conversion": {
+      "model": "meta/muse-spark-1.3-contributor#medium",
+      "description": "Mensagem, copy e caminho de contato da landing page. Acionado por build/plan.",
+      "mode": "subagent",
+      "steps": 8,
+      "system": "Você é o especialista de conversão da landing page. Use copywriting para textos e cro para estrutura/CTA/objeções. Responda compacto: objetivo, público, sequência de seções, textos e pendências de evidência. Sem editar arquivos, sem shell, sem delegar. Não invente depoimentos, resultados, preços ou urgência; marque [NEED] quando faltar prova. Não prometa lift de conversão.",
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "question", "resource": "*", "effect": "deny" },
+        { "action": "skill", "resource": "*", "effect": "deny" },
+        { "action": "skill", "resource": "copywriting", "effect": "allow" },
+        { "action": "skill", "resource": "cro", "effect": "allow" }
+      ]
+    }
+  },
+  "commands": {
+    "briefing": {
+      "description": "Consolidar Instagram + formulário em docs/BRIEFING.md",
+      "template": "Consolide as fontes em docs/BRIEFING.md separando fatos confirmados, sugestões e pendências. Não invente serviços, preços, depoimentos ou resultados. Liste o mínimo necessário para dimensionar o escopo. Siga docs/OPENCODE_WORKFLOW.md."
+    },
+    "precificar": {
+      "description": "Gerar escopo e orçamento a partir do briefing",
+      "template": "A partir de docs/BRIEFING.md, preencha docs/ESCOPO_E_ORCAMENTO.md com entregáveis, exclusões, revisões, prazo, custos recorrentes e proposta. Não inicie implementação nem crie direção visual/copy final antes da aprovação. Siga docs/OPENCODE_WORKFLOW.md."
+    },
+    "revisar-lp": {
+      "description": "Revisão enxuta da landing page pelo aspecto alterado",
+      "template": "Revise apenas o aspecto alterado ou incerto de $ARGUMENTS: build valida links/build/checklist; acione design só para problema visual concreto e conversion só para mensagem/CTA. Sem revisão em cascata. Retorne achados por severidade com arquivo/linha, mais pendências."
+    }
+  },
+  "instructions": ["docs/OPENCODE_WORKFLOW.md"],
+  "formatter": true,
+  "watcher": {
+    "ignore": ["node_modules/**", "dist/**", "build/**", ".astro/**", "coverage/**", "backup/**", "kb/**"]
+  }
+}
