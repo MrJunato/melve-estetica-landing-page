@@ -1,6 +1,6 @@
 # Escopo e orçamento — Melve Estética
 
-> A partir de `docs/BRIEFING.md`. V1 com placeholders `XPTO` para o cliente definir textos. Sem implementação antes da aprovação.
+> Escopo e condições aprovados conforme `docs/202610_-_Contrato_Landing_Page_Renato_e_Melve_assinado.pdf`, que prevalece em caso de divergência. A partir de `docs/BRIEFING.md`, a V1 de demonstração usa placeholders `XPTO` para o cliente definir textos. Implementação autorizada; publicação depende de autorização expressa.
 
 ## Entregáveis (v1 simples, foco em tráfego pago → WhatsApp)
 - Landing page estática em pt-BR, mobile-first, 1 página com até 5 blocos:
@@ -19,28 +19,32 @@
 - Produção fotográfica, logo, textos jurídicos, gestão de tráfego/anúncios
 - Copy final, tradução, múltiplas páginas ou variações para teste A/B
 - Registro/renovação do domínio, serviços adicionais pagos e manutenção recorrente (à parte)
+- Instalação/configuração de pixels, tags de publicidade, rastreamento de conversões ou ferramentas de análise; gestão de tráfego e anúncios
 
 ## Revisões
-- Incluídas: 2 rodadas simples de ajustes de texto/troca de fotos dentro das seções acima
+- Incluídos: ajustes adicionais de textos, imagens e apresentação dentro do escopo contratado, solicitados com antecedência compatível com sua execução e concluídos até **22/11/2026**. O contrato não limita as revisões a duas rodadas.
 - Novo orçamento: novas seções/páginas, integrações, identidade visual completa, copy final dedicada, catálogo de produtos
+- O encerramento das revisões não afasta eventual responsabilidade legal por defeitos do serviço originalmente contratado; correções de defeitos não se confundem com manutenção ou inclusão de conteúdos/funcionalidades.
 
 ## Prazo
-- Proposta compatível com o pedido de até 7 dias **após** briefing completo + aprovação deste escopo
+- Início dos serviços: **22/10/2026**. Entrega da versão final revisada: até **29/10/2026** (cláusula 3.1).
+- Os prazos pressupõem materiais, acessos e retornos da contratante em tempo hábil. Impedimentos devem ser comunicados por escrito; mudanças de datas exigem acordo escrito, sem prorrogação automática do período de revisões.
 - Publicação depende de contatos confirmados, fotos autorizadas, textos finais aprovados e domínio configurado. Placeholders `XPTO` são apenas para demonstração, não para campanhas.
 
 ## Infraestrutura aprovada e custos recorrentes
 - Solução aprovada pelo usuário: Cloudflare Pages no plano gratuito + domínio próprio pago.
 - Domínio e conta Cloudflare em nome do cliente. Cliente paga registro e renovações diretamente; nome e registrador ainda a escolher.
+- Escolha, contratação, titularidade, pagamento e renovação do domínio e da hospedagem são responsabilidade da contratante. O contratado não contratará nem custeará esses serviços em nome próprio ou da contratante (cláusula 4.1).
 - Hospedagem prevista: R$ 0 enquanto o site estático atender ao plano gratuito e aos termos vigentes; não prometer gratuidade eterna.
-- Configuração do domínio e publicação inicial previstas no serviço de construção, sujeitas à aprovação do orçamento e autorização de publicação. Não exigem mensalidade do desenvolvedor.
+- Configuração técnica inicial do domínio/hospedagem e publicação inicial incluídas no serviço contratado, mediante fornecimento dos acessos e autorização expressa para publicação. Não há mensalidade cobrada pelo desenvolvedor.
 - Limites consultados: 500 builds/mês, um por vez; até 20 mil arquivos e 25 MiB por arquivo. Requisições a arquivos estáticos gratuitas e ilimitadas, conforme condições do serviço. Functions e outros recursos têm limites próprios e estão fora do escopo.
 - E-mail profissional não incluído.
 - Manutenção/evolução: fora deste orçamento
 - Fontes: https://developers.cloudflare.com/pages/platform/limits/ e https://developers.cloudflare.com/pages/functions/pricing/
 
-## Proposta comercial
-- Valor único de construção: a aprovar. Última recomendação discutida: R$ 900 (não aprovada).
-- Condições: a aprovar. Sugestão discutida: 50% na contratação e 50% após aprovação final, antes da publicação definitiva (R$ 450 + R$ 450 se o valor de R$ 900 for aprovado).
-- Aprovação do cliente: [ ] aprovada em ____
-- A escolha da infraestrutura não aprova o preço, não libera implementação e não autoriza compras ou deploy.
-- Próximo passo após aprovação: `conversion` define sequência/CTA + `design` define direção visual, depois `build` implementa
+## Condições comerciais contratadas
+- Valor total: **R$ 500,00**, em **parcela única ao término dos serviços, mediante entrega e aprovação final da landing page por escrito** (cláusula 2.1). Sem entrada e sem mensalidade cobrada pelo contratado.
+- Escopo e orçamento: [x] aprovados conforme contrato assinado, conferido em 22/10/2026. Essa é a data de conferência, não uma afirmação sobre a data da assinatura.
+- Após a quitação, a contratante receberá os arquivos finais e poderá utilizá-los, mantê-los e alterá-los, observadas as licenças de componentes e materiais de terceiros (cláusula 7.1).
+- O contrato libera a implementação dentro do escopo; não autoriza compras nem publicação sem consentimento específico.
+- Próximo passo: `conversion` define sequência/CTA + `design` define direção visual, depois `build` implementa.
