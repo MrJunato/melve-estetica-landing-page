@@ -20,12 +20,16 @@
       <p>Prévia para aprovação. Textos e imagens em definição.</p>
     </aside>
 
-    <header class="site-header">
+    <header class="site-header" id="site-header">
       <div class="container header-inner">
         <a class="brand-link" href="#inicio" aria-label="Melvé, início">
           <img src="assets/melve-logo-480.webp" width="1536" height="1024" alt="Melvé estética profissional">
         </a>
-        <nav aria-label="Navegação principal">
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke-linecap="round"/></svg>
+          Menu
+        </button>
+        <nav id="primary-nav" aria-label="Navegação principal">
           <a href="#produtos">Produtos</a>
           <a href="#depoimentos">Depoimentos</a>
           <a href="#duvidas">Dúvidas</a>
@@ -179,5 +183,43 @@
         <p>Página demonstrativa. Conteúdo sujeito à aprovação.</p>
       </div>
     </footer>
+    <script>
+      (function () {
+        var header = document.getElementById("site-header");
+        var toggle = header ? header.querySelector(".menu-toggle") : null;
+        var nav = document.getElementById("primary-nav");
+        if (!header || !toggle || !nav) return;
+
+        function setOpen(open) {
+          header.classList.toggle("menu-open", open);
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+        }
+
+        toggle.addEventListener("click", function () {
+          setOpen(!header.classList.contains("menu-open"));
+        });
+
+        nav.addEventListener("click", function (event) {
+          if (event.target.closest("a")) setOpen(false);
+        });
+
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Escape" && header.classList.contains("menu-open")) {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+
+        var mq = window.matchMedia("(min-width: 600px)");
+        function handleViewportChange(event) {
+          if (event.matches) setOpen(false);
+        }
+        if (typeof mq.addEventListener === "function") {
+          mq.addEventListener("change", handleViewportChange);
+        } else if (typeof mq.addListener === "function") {
+          mq.addListener(handleViewportChange);
+        }
+      })();
+    </script>
   </body>
 </html>
