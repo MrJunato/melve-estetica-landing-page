@@ -48,7 +48,7 @@
             <p class="hero-description">Fale com a Melvé para consultar produtos, disponibilidade e condições de compra pelo WhatsApp.</p>
             <div class="contact-actions">
               <!-- Número pessoal autorizado apenas para testes. [NEED: substituir pelo WhatsApp oficial antes de publicar]. -->
-              <a class="button button-primary" href="https://wa.me/5511951780508?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Melv%C3%A9%20e%20gostaria%20de%20consultar%20produtos%2C%20disponibilidade%20e%20condi%C3%A7%C3%B5es%20de%20compra." target="_blank" rel="noopener noreferrer" aria-describedby="hero-whatsapp-note">
+              <a class="button button-primary" data-whatsapp href="https://wa.me/5511951780508?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Melv%C3%A9%20e%20gostaria%20de%20consultar%20produtos%2C%20disponibilidade%20e%20condi%C3%A7%C3%B5es%20de%20compra." target="_blank" rel="noopener noreferrer" aria-describedby="hero-whatsapp-note">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8 9 9 0 0 1-3.5-.7L4 20l1.2-4.5A9 9 0 0 1 4.5 12a8 8 0 0 1 8-8 7.5 7.5 0 0 1 7.5 7.5Z"/><path d="M8.5 8.5c.7 3.5 2.5 5.3 6 6l1-1.5-2-1-1 1c-1.3-.6-2.2-1.5-2.8-2.8l1-1-1-2-1.2 1.3Z" stroke-linejoin="round"/></svg>
                 Consultar produtos no WhatsApp
                 <span class="sr-only"> (abre em nova aba)</span>
@@ -164,7 +164,7 @@
           <h2 id="contact-title">Vamos conversar sobre quais produtos você procura?</h2>
           <p class="contact-description">Conte à Melvé quais produtos você procura e consulte disponibilidade e condições de compra pelo WhatsApp.</p>
           <div class="contact-actions">
-            <a class="button button-primary" href="https://wa.me/5511951780508?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Melv%C3%A9%20e%20gostaria%20de%20consultar%20produtos%2C%20disponibilidade%20e%20condi%C3%A7%C3%B5es%20de%20compra." target="_blank" rel="noopener noreferrer" aria-describedby="footer-whatsapp-note">
+            <a class="button button-primary" data-whatsapp href="https://wa.me/5511951780508?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Melv%C3%A9%20e%20gostaria%20de%20consultar%20produtos%2C%20disponibilidade%20e%20condi%C3%A7%C3%B5es%20de%20compra." target="_blank" rel="noopener noreferrer" aria-describedby="footer-whatsapp-note">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-8 8 9 9 0 0 1-3.5-.7L4 20l1.2-4.5A9 9 0 0 1 4.5 12a8 8 0 0 1 8-8 7.5 7.5 0 0 1 7.5 7.5Z"/><path d="M8.5 8.5c.7 3.5 2.5 5.3 6 6l1-1.5-2-1-1 1c-1.3-.6-2.2-1.5-2.8-2.8l1-1-1-2-1.2 1.3Z" stroke-linejoin="round"/></svg>
               Consultar produtos no WhatsApp
               <span class="sr-only"> (abre em nova aba)</span>
@@ -185,6 +185,48 @@
         <p>Página demonstrativa. Conteúdo sujeito à aprovação.</p>
       </div>
     </footer>
+
+    <dialog class="whatsapp-dialog" id="whatsapp-dialog" aria-labelledby="whatsapp-title" aria-describedby="whatsapp-intro">
+      <div class="whatsapp-panel">
+        <button class="whatsapp-close" type="button" aria-label="Fechar formulário">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke-linecap="round"/></svg>
+        </button>
+        <h2 id="whatsapp-title">Como podemos ajudar?</h2>
+        <p id="whatsapp-intro">Personalize sua mensagem. Tudo é opcional.</p>
+
+        <form id="whatsapp-form">
+          <fieldset class="whatsapp-intent">
+            <legend>O que você procura?</legend>
+            <label class="whatsapp-choice"><input type="radio" name="intent" value="cotacao"> <span>Cotar produtos que já conheço</span></label>
+            <label class="whatsapp-choice"><input type="radio" name="intent" value="reposicao"> <span>Repor meu estoque</span></label>
+            <label class="whatsapp-choice"><input type="radio" name="intent" value="portfolio"> <span>Conhecer o portfólio</span></label>
+          </fieldset>
+
+          <div class="whatsapp-field" id="whatsapp-products-field" hidden>
+            <label for="whatsapp-products">Quais produtos? <span>(opcional)</span></label>
+            <input id="whatsapp-products" name="products" type="text" maxlength="300" autocomplete="off" placeholder="Nomes dos produtos, separados por vírgulas…">
+          </div>
+
+          <div class="whatsapp-field">
+            <label for="whatsapp-name">Seu primeiro nome <span>(opcional)</span></label>
+            <input id="whatsapp-name" name="firstName" type="text" maxlength="60" autocomplete="given-name" placeholder="Seu primeiro nome…">
+          </div>
+
+          <details class="whatsapp-preview">
+            <summary>Ver mensagem pronta</summary>
+            <p id="whatsapp-message" aria-live="polite"></p>
+          </details>
+
+          <div class="whatsapp-actions">
+            <button class="button button-primary" type="submit">Continuar no WhatsApp<span class="sr-only"> (abre em nova aba)</span></button>
+            <a class="whatsapp-direct" id="whatsapp-direct" href="https://wa.me/5511951780508?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Melv%C3%A9%20e%20gostaria%20de%20consultar%20produtos%2C%20disponibilidade%20e%20condi%C3%A7%C3%B5es%20de%20compra." target="_blank" rel="noopener noreferrer">Prefiro falar direto<span class="sr-only"> (abre em nova aba)</span></a>
+          </div>
+          <p class="whatsapp-help">Você pode editar antes de enviar no WhatsApp. Não informe dados de pacientes.</p>
+          <p class="whatsapp-test-note">Número pessoal de teste. Contato oficial da Melvé pendente.</p>
+        </form>
+      </div>
+    </dialog>
+    <script src="whatsapp.js" defer></script>
     <script>
       (function () {
         var header = document.getElementById("site-header");
