@@ -22,7 +22,7 @@
     var intent = selected ? selected.value : "";
     var name = clean(nameInput.value);
     var products = clean(productsInput.value);
-    var greeting = name ? "Olá! Sou " + name + " e vim pelo site da Melvé. " : "Olá! Vim pelo site da Melvé. ";
+    var greeting = name ? "Olá! Sou " + name + " e vim pelo site da Lunéa. " : "Olá! Vim pelo site da Lunéa. ";
 
     if (intent === "cotacao") {
       return greeting + (products
@@ -57,13 +57,20 @@
     button.setAttribute("data-whatsapp", "");
     button.setAttribute("aria-haspopup", "dialog");
     button.setAttribute("aria-controls", dialog.id);
-    button.setAttribute("aria-describedby", link.getAttribute("aria-describedby"));
+    if (link.dataset.product) button.setAttribute("data-product", link.dataset.product);
     while (link.firstChild) button.appendChild(link.firstChild);
-    button.querySelector(".sr-only").textContent = " (abre formulário de contato)";
+    var srNote = button.querySelector("[data-new-tab]");
+    if (srNote) srNote.textContent = " (abre formulário de contato)";
     link.replaceWith(button);
 
     button.addEventListener("click", function () {
       opener = button;
+      var product = button.getAttribute("data-product");
+      if (product) {
+        // Card de produto: já deixa a cotação desse item preenchida.
+        form.querySelector('input[name="intent"][value="cotacao"]').checked = true;
+        productsInput.value = product;
+      }
       updateMessage();
       dialog.showModal();
       document.body.classList.add("modal-open");
