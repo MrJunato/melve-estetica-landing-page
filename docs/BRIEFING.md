@@ -38,3 +38,9 @@
 - Fotos do Instagram só entram na página após autorização explícita do que pode ser usado.
 - Sem alegação clínica, certificação, resultado ou preço sem prova autorizada.
 - Escopo e orçamento aprovados pelo contrato assinado; implementação liberada dentro do escopo. Contratação de domínio/hospedagem é responsabilidade da contratante. Publicação continua dependente da aprovação dos conteúdos e de autorização expressa.
+
+## Atualização 11/11/2026 — rebrand para Lunéa
+- Marca passa a ser **Lunéa** (Lunéa Professional). Instagram: https://www.instagram.com/luneaestetica_br?cplk=MTV5cjZ0ajM3dXJhMQ== (bio: distribuidora para clínicas de estética; procedência, agilidade e custo).
+- Legendas públicas confirmam: portfólio Dysport, Liztox 200U, Line Body 55/100, MOMM, Sculptra; atuação concentrada no Pará/Região Norte com envio para outras regiões; envio Azul Cargo Express, Correios e rodoviário; condições para compras recorrentes/maior volume.
+- WhatsApp divulgado nas legendas: (91) 98417-8097. [NEED: confirmar se substitui o número de teste do site.]
+- Imagens dos posts usadas na página a pedido do responsável. Depoimentos fictícios removidos (sem depoimentos reais autorizados).
